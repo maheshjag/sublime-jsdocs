@@ -281,10 +281,11 @@ class JsdocsParser(object):
 
         description = self.getNameOverride() or ('[%s description]' % escape(name))
         out.append("${1:%s}" % description)
-        out.append("@%s %s" % (
-            "method" if self.settings['autoAddMethod'] else "",
-            escape(name)
-        ))
+        if (self.viewSettings.get("jsdocs_autoadd_method_tag") == True):
+            out.append("@%s %s" % (
+                "method",
+                escape(name)
+            ))
 
         self.addExtraTags(out)
 
@@ -444,7 +445,6 @@ class JsdocsJavascript(JsdocsParser):
             "curlyTypes": True,
             'typeInfo': True,
             "typeTag": "type",
-            "autoAddMethod": True,
             # technically, they can contain all sorts of unicode, but w/e
             "varIdentifier": identifier,
             "fnIdentifier":  identifier,
