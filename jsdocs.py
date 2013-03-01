@@ -282,13 +282,8 @@ class JsdocsParser(object):
             return out
 
         description = self.getNameOverride() or ('[%s description]' % escape(name))
-        out.append("${1:%s}" % description)
-        if (self.viewSettings.get("jsdocs_autoadd_method_tag") == True):
-            out.append("@%s %s" % (
-                "method",
-                escape(name)
-            ))
 
+        out.append("${1:%s}" % description)
         if (self.viewSettings.get("jsdocs_autoadd_method_tag") == True):
             out.append("@%s %s" % (
                 "method",
